@@ -14,7 +14,7 @@ public class DynamicProgramming {
         // System.out.println(climbToNDPTab(arr, N));
 
         // 4. Longest increasing sequence
-        int[] arr = {10, 2, 9, 5, 7, 3, 60, 80, 1};
+        // int[] arr = {10, 2, 9, 5, 7, 3, 60, 80, 1};
         // System.out.println(lis(arr, 0, -1, new int[arr.length][arr.length]));
 
         // 4. Longest increasing sequence 2nd approach
@@ -26,7 +26,12 @@ public class DynamicProgramming {
         // System.out.println(ans);
 
         // 4. Longest increasing sequence tabulation approach
-        System.out.println(lisTab(arr));
+        // System.out.println(lisTab(arr));
+
+        // 5. Longest common sequence
+        String a = "abbcdgf";
+        String b = "bbadcgf";
+        System.out.println(lcsTab(a, b));
     }
     
     // 1. Fibonacci without DP
@@ -167,6 +172,7 @@ public class DynamicProgramming {
         return max+1;
     }
 
+    // 4. Longest increasing sequence at ith in Tabulation
     public static int lisTab(int[] arr){
         int[] dp = new int[arr.length];
         dp[0] = 1;
@@ -182,5 +188,34 @@ public class DynamicProgramming {
             ans = Math.max(ans, dp[i]);
         }
         return ans;
+    }
+
+    // 5. Longest common sequence - Memoization
+    public static int lcs(String s1, String s2, int i, int j, int[][] dp){
+        if(i==s1.length()||j==s2.length())
+            return 0;
+        if(dp[i][j]!=0)
+            return dp[i][j];
+        int ans = 0;
+        if(s1.charAt(i)==s2.charAt(j))
+            ans = 1+lcs(s1, s2, i+1, j+1, dp);
+        else
+            ans = Math.max(lcs(s1, s2, i+1, j, dp), lcs(s1, s2, i, j+1, dp));
+        dp[i][j]=ans;
+        return ans;
+    }
+
+    // 5. Longest common sequence - Tabulation
+    public static int lcsTab(String s1, String s2){
+        int[][] dp = new int[s1.length()+1][s2.length()+1];
+        for(int i=dp.length-2;i>=0;i--){
+            for(int j=dp.length-2;j>=0;j--){
+                if(s1.charAt(i)==s2.charAt(j))
+                    dp[i][j]=1+dp[i+1][j+1];
+                else
+                    dp[i][j] = Math.max(dp[i+1][j], dp[i][j+1]);
+            }
+        }
+        return dp[0][0];
     }
 }
