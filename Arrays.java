@@ -130,5 +130,17 @@ class Arrays {
             }
         }
         return Integer.parseInt(result);
-    }    
+    }
+
+    public static String smallestNumberPro(int n){
+        String ans = "";
+        for(int i=9;i>=2;i--){
+            while(n%i==0){
+                ans=i+ans;
+                n/=i;
+            }
+        }
+        if(n!=1) return String.valueOf(n);
+        return ans;
+    }
 }
