@@ -102,6 +102,8 @@ class Arrays {
      * Check the divisibility by every digit from 2 to 9 as there are only these digits
      * Create an array from 2 to 9 and keep dividing and incrementing the value by 1
      * Start from the lowest index i.e 2 and keep on adding the numbers to the string
+     * Time - O(logN)
+     * Space - O(1)
     */
     
     public static boolean isPrime(int n){
