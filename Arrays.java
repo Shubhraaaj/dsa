@@ -90,4 +90,45 @@ class Arrays {
         }
      }
 
+    public class Main
+{
+    /*
+     * Smallest number whose product is N
+     * If N = 100 then the smallest number will be 455
+     * If N = 17 then the smallest number will be 17 because it is prime and has not factors
+     * If N = 81000 then the smallest number will be 555899.
+     * 
+     * Approach
+     * Check the divisibility by every digit from 2 to 9 as there are only these digits
+     * Create an array from 2 to 9 and keep dividing and incrementing the value by 1
+     * Start from the lowest index i.e 2 and keep on adding the numbers to the string
+    */
+    
+    public static boolean isPrime(int n){
+        for(int i = 2; i<=n/2; i++)
+            if(n%i==0)
+                return false;
+        return true;
+    }
+    
+    public static int smallestNumber(int n){
+        if(n<10) return n;
+        if(isPrime(n)) return n;
+        int[] factors = new int[8];
+        for(int i=9;i>1;i--){
+            while(n%i==0){
+                factors[i-2]=factors[i-2]+1;
+                n/=i;
+            }
+            if(n==1) break;
+        }
+        String result = "";
+        for(int i=0;i<factors.length;i++){
+            while(factors[i]!=0){
+                result = result+""+(i+2);
+                factors[i]=factors[i]-1;
+            }
+        }
+        return Integer.parseInt(result);
+    }    
 }
