@@ -145,4 +145,41 @@ class Arrays {
         if(n!=1) return String.valueOf(n);
         return ans;
     }
+
+    /*
+     * Find the majority element in the array
+     * Majority element is an element which appears more then n/2 times in the array where n = length of array
+     * 
+     * Approach
+     * 1. Bruteforce the array to calculate the frequency of each element
+     * 2. Store the frequency of each element in a hashmap
+     * 3. Moore's voting algorithm - Majority element is occurring n/2 times therefore other elements is less than n/2 times
+    */
+    
+    public static void majorElement(int[] n) {
+        HashMap<Integer, Integer> freqMap = new HashMap<>();
+        for (int i = 0; i < n.length; i++) {
+            freqMap.put(n[i], freqMap.getOrDefault(n[i], 0) + 1);
+        }
+        
+        final int[] result = {-1}; // Using an array to hold the result
+        freqMap.forEach((k, v) -> {
+            if (v > n.length / 2) {
+                result[0] = k; // Updating the result array
+            }
+        });
+        
+        if (result[0] != -1) {
+            System.out.println(result[0]);
+        } else {
+            System.out.println("No majority element found");
+        }
+    }
+
+    
+    public static void main(String[] args) {
+        int[] arr = {1,2,3,4,4,4,4};
+        majorElement(arr);
+    }
+    
 }
