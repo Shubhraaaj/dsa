@@ -26,8 +26,6 @@ Each question is accompanied by a detailed solution and explanation to help you 
 
 ### How to Use
 Clone the Repository: Start by cloning the repository to your local machine.
-bash
-Copy code
 `git clone https://github.com/your-username/DSA-Questions-and-Solutions.git`
 
 ### Contributing
