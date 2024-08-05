@@ -176,6 +176,38 @@ class Arrays {
         }
     }
 
+    /*
+    * Rotate the N-matrix to 90 degrees
+    * Approach
+    * 1. Transpose the matrix
+    *    a. The diagonal elements are constant
+    *    b. a[i,j] = temp = a[j,i] 
+    * 2. Swap the columns a[0]...a[n]
+    * Time - O(n^2)
+    * Space - O(1)
+    */
+
+    public static void rotateMatrix(int[][] n){
+        // Transpose the matrix
+        for(int i=0; i<n.length; i++){
+            for(int j=0; j<n.length; j++){
+                int temp = n[i][j];
+                n[i][j]=n[j][i];
+                n[j][i]=temp;
+            }
+        }
+        // Swap the columns
+        int left = 0, right = n.length;
+        while(left<right){
+            for(int i=0; i< n.length; i++){
+                int temp = n[i][left];
+                n[i][left] = n[i][right];
+                n[i][right] = temp;
+            }
+            left++;
+            right--;
+        }
+    }
     
     public static void main(String[] args) {
         int[] arr = {1,2,3,4,4,4,4};
