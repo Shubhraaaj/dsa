@@ -266,6 +266,59 @@ class Arrays {
             cMin++;
         }
     }
+
+    /*
+    * Given an integer A, generate a square matrix filled with elements from 1 to A2 in spiral order and return the generated square matrix.
+    * 
+    * Approach
+    * 1. It is going to be an NxN matrix so we know the size of the matrix
+    * 2. We will have 4 variables - rMin, rMax, cMin, cMax
+    * 3. We start printing with top boundary, right boundary, bottom boundary, left boundary
+    * 4. To populate the top boundary
+    *    a. rMin remains constant and we traverse from cMin to cMax
+    *    b. Then we increment rMin++, so it moves to next row.
+    * 5. To populate the right boundary
+    *    a. cMax remains constant and we traverse from rMin to rMax
+    *    b. Then we decrement cMax--, so it moves to the previous column.
+    * 6. To populate the bottom boundary
+    *    a. rMax remains constant and we traverse from cMax to cMin
+    *    b. Then we decrement rMax--, so it moves to previous row.
+    * 7. To populate the left boundary
+    *    a. cMin remains constant and we traverse from rMax to rMin
+    *    b. Then we increment cMin++, so it moves to next column.
+    * 8. Then we move to the next rectangle inside
+    * Time - O(n*m) | Space - O(1) 
+    */
+
+    public int[][] generateSpiralMatrix(int A) {
+        int limit=A*A;
+        int element=1;
+        int[][] res = new int[A][A];
+        int rmin=0,rmax=A-1,cmin=0,cmax=A-1;
+        while(element<=limit){
+            //top left to right
+            for(int col=cmin;col<=cmax&&element<=limit;col++){
+                res[rmin][col]=element++; 
+            }
+            rmin++;
+            // right top to bottom
+            for(int row=rmin;row<=rmax&&element<=limit;row++){
+                res[row][cmax]=element++; 
+            }
+            cmax--;
+            // bottom right to left
+            for(int col=cmax;col>=cmin&&element<=limit;col--){
+                res[rmax][col]=element++; 
+            }
+            rmax--;
+            // left bottom to top
+            for(int row=rmax;row>=rmin&&element<=limit;row--){
+                res[row][cmin]=element++; 
+            }
+            cmin++;
+        }
+        return res;
+    }
     
     public static void main(String[] args) {
         int[] arr = {1,2,3,4,4,4,4};
