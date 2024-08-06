@@ -229,6 +229,7 @@ class Arrays {
      *    a. cMin remains constant and we traverse from rMax to rMin
      *    b. Then we increment cMin++, so it moves to next column.
      * 8. Then we move to the next rectangle inside
+     * Time - O(n*m) | Space - O(1)
     */
     
     public static void spiralMatrix(int[][] arr){
@@ -240,25 +241,25 @@ class Arrays {
         
         while(count<n*m){
             // Top boundary
-            for(int col=cMin; col<=cMax; col++){
+            for(int col=cMin; col<=cMax && count<n*m; col++){
                 System.out.print(arr[rMin][col]+" ");
                 count++;
             }
             rMin++;
             // Right boundary
-            for(int row=rMin; row<=rMax; row++){
+            for(int row=rMin; row<=rMax && count<n*m; row++){
                 System.out.print(arr[row][cMax]+" ");
                 count++;
             }
             cMax--;
             // Bottom boundary
-            for(int col=cMax; col>=cMin; col--){
+            for(int col=cMax; col>=cMin && count<n*m; col--){
                 System.out.print(arr[rMax][col]+ " ");
                 count++;
             }
             rMax--;
             // Left boundary
-            for(int row=rMax; row>=rMin; row--){
+            for(int row=rMax; row>=rMin && count<n*m; row--){
                 System.out.print(arr[row][cMin]+ " ");
                 count++;
             }
