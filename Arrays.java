@@ -208,6 +208,63 @@ class Arrays {
             right--;
         }
     }
+
+    /*
+     * Print the elements of a NxM matrix in sprial order
+     * 
+     * Approach
+     * 1. Consider the matrix as rectangles
+     * 2. We will have 4 variables - rMin, rMax, cMin, cMax
+     * 3. We start printing with top boundary, right boundary, bottom boundary, left boundary
+     * 4. To print the top boundary
+     *    a. rMin remains constant and we traverse from cMin to cMax
+     *    b. Then we increment rMin++, so it moves to next row.
+     * 5. To print the right boundary
+     *    a. cMax remains constant and we traverse from rMin to rMax
+     *    b. Then we decrement cMax--, so it moves to the previous column.
+     * 6. To print the bottom boundary
+     *    a. rMax remains constant and we traverse from cMax to cMin
+     *    b. Then we decrement rMax--, so it moves to previous row.
+     * 7. To print the left boundary
+     *    a. cMin remains constant and we traverse from rMax to rMin
+     *    b. Then we increment cMin++, so it moves to next column.
+     * 8. Then we move to the next rectangle inside
+    */
+    
+    public static void spiralMatrix(int[][] arr){
+        int n=arr.length;
+        int m=arr[0].length;
+        int rMin=0, rMax=arr.length-1;
+        int cMin=0, cMax=arr[0].length-1;
+        int count=0;
+        
+        while(count<n*m){
+            // Top boundary
+            for(int col=cMin; col<=cMax; col++){
+                System.out.print(arr[rMin][col]+" ");
+                count++;
+            }
+            rMin++;
+            // Right boundary
+            for(int row=rMin; row<=rMax; row++){
+                System.out.print(arr[row][cMax]+" ");
+                count++;
+            }
+            cMax--;
+            // Bottom boundary
+            for(int col=cMax; col>=cMin; col--){
+                System.out.print(arr[rMax][col]+ " ");
+                count++;
+            }
+            rMax--;
+            // Left boundary
+            for(int row=rMax; row>=rMin; row--){
+                System.out.print(arr[row][cMin]+ " ");
+                count++;
+            }
+            cMin++;
+        }
+    }
     
     public static void main(String[] args) {
         int[] arr = {1,2,3,4,4,4,4};
