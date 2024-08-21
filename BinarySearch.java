@@ -4,6 +4,7 @@ public class Main {
         int key = 1;
         int index = findElementInRotatedArray(arr, key);
         System.out.println("Index of " + key + " is: " + index);
+        
     }
 public static int findElementInRotatedArray(int[] arr, int key) {
         int left = 0;
