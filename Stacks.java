@@ -14,6 +14,10 @@ public class Stacks {
         // System.out.println(minStack.top()); // Output: 0
         // System.out.println(minStack.getMin()); // Output: -2
 
+        System.out.println(removeConscutive("aabbccc", 2)); // Output: "c"
+        System.out.println(removeConscutive("abbccaa", 2)); // Output: "a"
+        System.out.println(removeConscutive("aaacbbbcc", 3)); // Output:
+
     }
 
     // Check for balance paranthesis
@@ -69,6 +73,30 @@ public class Stacks {
         return stack.pop();
     }
 
+    public static String removeConscutive(String s, int k) {
+        Stack<Pair> stack = new Stack<Pair>();
+        for (char c : s.toCharArray()) {
+            if (!stack.isEmpty() && stack.peek().character == c) {
+                Pair top = stack.pop();
+                top.count++;
+                if (top.count < k) {
+                    stack.push(top);
+                }
+            } else {
+                stack.push(new Pair(c, 1));
+            }
+        }
+        // Build the result string from the stack
+        StringBuilder result = new StringBuilder();
+        while (!stack.isEmpty()) {
+            Pair top = stack.pop();
+            for (int i = 0; i < top.count; i++) {
+                result.append(top.character);
+            }
+        }
+        return result.reverse().toString();
+    }
+
 }
 
 class MinStack {
@@ -98,6 +126,17 @@ class MinStack {
 
     public int getMin() {
         return minStack.peek();
+    }
+
+}
+
+class Pair {
+    char character;
+    int count;
+
+    Pair(char character, int count) {
+        this.character = character;
+        this.count = count;
     }
 
 }
